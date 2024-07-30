@@ -40,7 +40,7 @@ const Sidebar = () => {
           {categories.map(({ name }) => (
             <li key={name}>
               <Link className="cat-list-link text-capitalizeC" to="">
-                {name}
+                {name.replace("-", " ")}
               </Link>
             </li>
           ))}

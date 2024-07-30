@@ -27,6 +27,10 @@ function App() {
         <BrowserRouter>
           <Header />
           <Sidebar />
+
+          <Routes>
+            <Route path="/" element={ <Home />} />
+          </Routes>
         </BrowserRouter>
       </Provider>
     </div>

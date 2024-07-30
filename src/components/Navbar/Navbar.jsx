@@ -7,7 +7,8 @@ import { getAllCategories } from "../../store/categorySlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  // const categories = useSelector(getAllCategories);
+  const categories = useSelector(getAllCategories);
+  console.log(categories);
   return (
     <nav className="navbar">
       <div className="navbar-cnt flex align-center">
@@ -48,9 +49,15 @@ const Navbar = () => {
           </div>
 
           <ul className="navbar-nav flex align-center fs-12 fw-4 font-manrope">
-            {
-              // taking only first 8 categories
-            }
+          
+
+            {/* {categories.slice(0, 8).map(({ name }) => (
+              <li key={name}>
+                <Link className="text-white search-btn flex align-center justify-center" to="">
+                  {name}
+                </Link>
+              </li>
+            ))} */}
           </ul>
         </div>
 
