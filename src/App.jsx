@@ -29,8 +29,23 @@ function App() {
           <Sidebar />
 
           <Routes>
+            {/* home page route */}
             <Route path="/" element={ <Home />} />
+
+            {/* single product route */}
+            <Route path="/product/:id" element={ <ProductSingle />} />
+
+            {/* categories wise product listing route */}
+            <Route path="/category/:category" element={<CategoryProduct />} />
+
+            {/* cart */}
+            <Route path="/cart" element={<Cart />} />
+
+            {/* searched products */}
+            <Route path="/search/:searchTerm" element={<Search />} />
           </Routes>
+
+          <Footer />
         </BrowserRouter>
       </Provider>
     </div>

@@ -8,7 +8,6 @@ import { getAllCategories } from "../../store/categorySlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
-  console.log(categories);
   return (
     <nav className="navbar">
       <div className="navbar-cnt flex align-center">

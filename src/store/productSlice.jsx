@@ -45,11 +45,12 @@ export const fetchAsyncProducts = createAsyncThunk("products/fetch", async(limit
 })
 
 // getting the single products data also
-export const fetchAsyncProductsSingle = createAsyncThunk('product-single', async(id) => {
-    const response = await fetch(`${BASE_URL}products/${id}`);
+
+export const fetchAsyncProductsSingle = createAsyncThunk('product-single/fetch', async(id) => {
+    const response = await fetch(`${BASE_URL}product/${id}`);
     const data = await response.json();
     return data;
-})
+});
 
 export const getAllProducts = (state) => state.product.products;
 export const getAllProductsStatus = (state) => state.product.productsStatus;
