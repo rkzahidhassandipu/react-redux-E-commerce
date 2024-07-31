@@ -6,7 +6,7 @@ import { STATUS } from "../utils/status";
 const initialState ={
     products: [],
     productsStatus: STATUS.IDLE,
-    ProductSingle: [],
+    ProductSingle: {},
     productSingleStatus: STATUS.IDLE
 }
 const productSlice = createSlice({
@@ -29,6 +29,7 @@ const productSlice = createSlice({
             state.productSingleStatus = STATUS.LOADING
         })
         .addCase(fetchAsyncProductsSingle.fulfilled, (state, action) => {
+            state.productSingle = action.payload; 
             state.productSingleStatus = STATUS.SUCCEEDED
         })
         .addCase(fetchAsyncProductsSingle.rejected, (state, action) => {
@@ -46,7 +47,7 @@ export const fetchAsyncProducts = createAsyncThunk("products/fetch", async(limit
 
 // getting the single products data also
 
-export const fetchAsyncProductsSingle = createAsyncThunk('product-single/fetch', async(id) => {
+export const fetchAsyncProductsSingle = createAsyncThunk('product-single/fetch', async (id) => {
     const response = await fetch(`${BASE_URL}product/${id}`);
     const data = await response.json();
     return data;
