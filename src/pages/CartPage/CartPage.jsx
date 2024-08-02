@@ -53,16 +53,17 @@ const CartPage = () => {
           <div className='cart-cbody bg-white' key={carts?.id}>
             {
               carts.map((cart, index) => {
+                const {id, title, discountedPrice, quantity, totalPrice} = cart;
                 return (
-                  <div className='cart-ctr py-4' key={cart?.id}>
+                  <div className='cart-ctr py-4' key={id}>
                     <div className='cart-ctd'>
                       <span className='cart-ctxt'>{index + 1}</span>
                     </div>
                     <div className='cart-ctd'>
-                      <span className='cart-ctxt'>{cart?.title}</span>
+                      <span className='cart-ctxt'>{title}</span>
                     </div>
                     <div className='cart-ctd'>
-                      <span className='cart-ctxt'>{formatPrice(cart?.discountedPrice)}</span>
+                      <span className='cart-ctxt'>{formatPrice(discountedPrice)}</span>
                     </div>
                     <div className='cart-ctd'>
                       <div className='qty-change flex align-center'>
@@ -71,10 +72,10 @@ const CartPage = () => {
                         </button>
 
                         <div className='qty-value flex align-center justify-center'>
-                          {cart?.quantity}
+                          {quantity}
                         </div>
 
-                        <button type='button' className='qty-increase flex align-center justify-center' onClick={() => dispatch(toggleCartQty({id: cart?.id, type: "INC"}))}>
+                        <button type='button' className='qty-increase flex align-center justify-center' onClick={() => dispatch(toggleCartQty({id: id, type: "INC"}))}>
                           <i className='fas fa-plus'></i>
                         </button>
                       </div>
@@ -82,11 +83,11 @@ const CartPage = () => {
 
                     <div className='cart-ctd'>
                       <span className='cart-ctxt text-orange fw-5'>
-                        {formatPrice(cart?.totalPrice)}
+                        {formatPrice(totalPrice)}
                       </span>
                     </div>
                     <div className='cart-ctd'>
-                      <button className='cart-ctxt text-orange fw-5' onClick={() => dispatch (removeFromCart(cart?.id))}>
+                      <button className='cart-ctxt text-orange fw-5' onClick={() => dispatch (removeFromCart(id))}>
                         Delete
                       </button>
                     </div>

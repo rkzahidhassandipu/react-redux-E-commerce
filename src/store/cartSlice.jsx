@@ -6,7 +6,7 @@ const fetchFromLocalStorage = () => {
 }
 
 const storeInLocalStore = (data) => {
-    localStorage.setItem('cart', JSON.stringify(data))
+    localStorage.setItem('cart', JSON.stringify(data));
 }
 
 const initialState = {
@@ -27,16 +27,15 @@ const CartSlice = createSlice({
                 state.carts = state.carts.map(item => {
                     if (item.id === action.payload.id) {
                         const updatedQuantity = item.quantity + action.payload.quantity;
-                        const updatedTotalPrice = updatedQuantity * item.price;
+                        const updatedTotalPrice = updatedQuantity * item.discountedPrice;
 
                         return {
                             ...item,
                             quantity: updatedQuantity,
                             totalPrice: updatedTotalPrice
-                        }
-                    } else {
-                        return item;
-                    }
+                        };
+                    } 
+                    return item;
                 });
             } else {
                 state.carts.push(action.payload);
@@ -44,11 +43,11 @@ const CartSlice = createSlice({
             state.itemsCount = state.carts.reduce((total, item) => total + item.quantity, 0);
             state.totalAmount = state.carts.reduce((total, item) => total + item.totalPrice, 0);
 
-            storeInLocalStore(state.carts)
+            storeInLocalStore(state.carts);
         },
         removeFromCart: (state, action) => {
-            const tempCart = state.carts.filter(item => item.id !== action.payload);
-            state.carts = tempCart;
+            state.carts = state.carts.filter(item => item.id !== action.payload);
+            
             storeInLocalStore(state.carts);
         },
         clearCart: (state) => {
@@ -56,35 +55,27 @@ const CartSlice = createSlice({
             storeInLocalStore(state.carts)
         },
         getCartTotal: (state) => {
-            state.totalAmount = state.carts.reduce((cartTotal, cartItem) => {
-                return cartTotal += cartItem.totalPrice
-            }, 0);
+            state.totalAmount = state.carts.reduce((cartTotal, cartItem) => 
+            cartTotal + cartItem.totalPrice, 0);
             state.itemsCount = state.carts.length;
         },
         toggleCartQty: (state, action) => {
-            const tempCart = state.carts.map(item => {
+            state.carts = state.carts.map(item => {
                 if(item.id === action.payload.id){
                     let tempQty = item.quantity;
                     let tempTotalPrice = item.totalPrice;
 
                     if(action.payload.type === "INC"){
-                        tempQty++;
-                        if(tempQty === item.stock) {
-                            tempQty = item.stock;
-                            tempTotalPrice = tempQty * item.discountedPrice;
-                        }
-                        if(action.payload.type === "DEC"){
-                            tempQty--;
-                            if(tempQty < 1){
-                                tempQty = 1;
-                                tempTotalPrice = tempQty * item.discountedPrice;;
-                            }
-                            return {...item, quantity: tempQty, totalPrice: tempTotalPrice}
-                        }
+                        tempQty = Math.min(item.stock, tempQty + 1);
+                    }else if(action.payload.type === "DEC"){
+                        tempQty = Math.max(1, tempQty - 1)
                     }
+                    tempTotalPrice = tempQty * item.discountedPrice;
+                    
+                    return {...item, quantity: tempQty, totalPrice: tempTotalPrice};
                 }
+                return item;
             });
-            state.carts = tempCart;
             storeInLocalStore(state.carts)
         },
         setCartMessageOn: (state)=>{
