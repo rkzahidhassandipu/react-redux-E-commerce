@@ -102,6 +102,30 @@ const CartPage = () => {
               })
             }
           </div>
+
+          <div className='cart-cfoot flex align-start justify-between py-3 bg-white'>
+            <div className='cart-cfoot-l'>
+              <button className='clear-cart-btn text-danger fs-15 text-uppercase fw-4'
+                onClick={() => dispatch(clearCart())}
+              >
+                <span className='mx-1'>Clear Cart</span>
+                <i className='fas fa-trash'></i>
+              </button>
+            </div>
+
+            <div className='cart-cfoot-r flex flex-column justify-end'>
+              <div className='total-txt flex align-center justify-end'>
+                <div className='font-monrope fw-5'>
+                  Total ({itemsCount}) items:
+                </div>
+                <span className='text-orange fs-22 mx-2 fw-6'>
+                  {formatPrice(totalAmount)}
+                </span>
+              </div>
+
+              <button className='checkout-btn text-white bg-orange fs-16'>Check out</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

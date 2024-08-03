@@ -28,7 +28,6 @@ const CartSlice = createSlice({
                     if (item.id === action.payload.id) {
                         const updatedQuantity = item.quantity + action.payload.quantity;
                         const updatedTotalPrice = updatedQuantity * item.discountedPrice;
-                        console.log(updatedQuantity)
 
                         return {
                             ...item,

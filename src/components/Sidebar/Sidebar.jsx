@@ -38,8 +38,8 @@ const Sidebar = () => {
         </div>
         <ul className="cat-list">
           {categories.map(({ name }) => (
-            <li key={name}>
-              <Link className="cat-list-link text-capitalizeC" to="">
+            <li key={name} onClick={() => dispatch(setSidebarOff())}>
+              <Link className="cat-list-link text-capitalizeC" to={`category/${name}`}>
                 {name.replace("-", " ")}
               </Link>
             </li>
