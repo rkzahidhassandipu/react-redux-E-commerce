@@ -6,7 +6,6 @@ import { nanoid } from 'nanoid';
 
 const CartModal = ({carts}) => {
   let id = nanoid();
-  // console.log(id)
   return (
     <div className='cart-modal'>
         <h5 className='cart-modal-title fw-5 fs-15 font-manrope text-center'>Recently Added products</h5>

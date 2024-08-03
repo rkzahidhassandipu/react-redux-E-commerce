@@ -15,8 +15,10 @@ const Navbar = () => {
   const itemsCount = useSelector(getCartItemsCount);
 
   useEffect(() => {
-    dispatch(getCartTotal);
-  }, [carts])
+    dispatch(getCartTotal());
+  }, [carts, dispatch]);
+
+
 
   return (
     <nav className="navbar">

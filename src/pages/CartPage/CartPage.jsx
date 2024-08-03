@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./CartPage.scss";
 import { useSelector, useDispatch } from 'react-redux';
 import { shopping_cart  } from '../../utils/images';
@@ -11,6 +11,11 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
   const {itemsCount, totalAmount} = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(getCartTotal())
+  }, [dispatch]);
+  
 
   if(carts.length === 0){
     return (
@@ -54,6 +59,7 @@ const CartPage = () => {
             {
               carts.map((cart, index) => {
                 const {id, title, discountedPrice, quantity, totalPrice} = cart;
+                
                 return (
                   <div className='cart-ctr py-4' key={id}>
                     <div className='cart-ctd'>
@@ -103,3 +109,6 @@ const CartPage = () => {
 }
 
 export default CartPage
+
+
+
